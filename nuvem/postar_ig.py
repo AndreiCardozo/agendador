@@ -35,8 +35,9 @@ def chamar(metodo, caminho, **dados):
 
 
 def postar(e):
+    extra = {"cover_url": e["capa_url"]} if e.get("capa_url") else {}
     cont = chamar("POST", f"{IG_ID}/media", media_type="REELS", video_url=e["video_url"], caption=e["legenda"],
-                  share_to_feed="true")["id"]
+                  share_to_feed="true", **extra)["id"]
     for _ in range(60):                       # até ~10 min processando
         st = chamar("GET", cont, fields="status_code,status")
         if st.get("status_code") == "FINISHED":
@@ -99,7 +100,8 @@ def main():
             except Exception as x:
                 salvar(e["id"], status="erro", erro=str(x)[:300])
                 print("erro", e["id"], x)
-        subprocess.run(["gh", "release", "delete-asset", TAG, f"{e['id']}.mp4", "-y"], check=False)
+        for nome in (f"{e['id']}.mp4", f"{e['id']}_capa.jpg"):
+            subprocess.run(["gh", "release", "delete-asset", TAG, nome, "-y"], check=False)
 
 
 if __name__ == "__main__":
