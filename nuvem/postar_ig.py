@@ -14,7 +14,8 @@ from datetime import datetime, timedelta, timezone
 
 HOST = "https://graph.facebook.com/v27.0"
 TOKEN, IG_ID = os.environ["IG_TOKEN"], os.environ["IG_ID"]
-ARQ = "nuvem/fila_ig.json"
+ARQ = os.environ.get("ARQ", "nuvem/fila_ig.json")
+TAG = os.environ.get("TAG", "ig-fila")
 ATRASO_MAX = timedelta(hours=6)          # se o robô ficou parado muito tempo, não posta tudo de uma vez
 
 
@@ -98,7 +99,7 @@ def main():
             except Exception as x:
                 salvar(e["id"], status="erro", erro=str(x)[:300])
                 print("erro", e["id"], x)
-        subprocess.run(["gh", "release", "delete-asset", "ig-fila", f"{e['id']}.mp4", "-y"], check=False)
+        subprocess.run(["gh", "release", "delete-asset", TAG, f"{e['id']}.mp4", "-y"], check=False)
 
 
 if __name__ == "__main__":
