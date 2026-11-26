@@ -43,5 +43,20 @@
    "gta"
   ],
   "status": "aguardando"
+ },
+ {
+  "id": "4e2deed8c0",
+  "horario_utc": "2026-11-28T12:00:00Z",
+  "video_url": "https://github.com/AndreiCardozo/agendador/releases/download/yt-fila/yt_4e2deed8c0.mp4",
+  "titulo": "CORINGA VIROU GANGSTA NO GTA 6 #shorts",
+  "descricao": "Ninguém negocia com o Coringa 😤💰 #gta6 #gtavi #coringa #cortes #streamer\n\nCréditos ao streamer Coringa",
+  "tags": [
+   "gta6",
+   "gtavi",
+   "coringa",
+   "cortes",
+   "streamer"
+  ],
+  "status": "aguardando"
  }
 ]
