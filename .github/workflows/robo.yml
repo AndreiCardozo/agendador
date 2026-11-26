@@ -1,0 +1,36 @@
+name: Robô (Instagram e YouTube, sempre ligado)
+
+on:
+  schedule:
+    - cron: "17 * * * *"       # reserva: de hora em hora (se a corrente de rodadas quebrar, isso religa)
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: robo
+  cancel-in-progress: false
+
+jobs:
+  robo:
+    runs-on: ubuntu-latest
+    timeout-minutes: 355
+    steps:
+      - uses: actions/checkout@v4
+      - name: Confere as filas a cada minuto e posta na hora
+        env:
+          IG_TOKEN: ${{ secrets.IG_TOKEN }}
+          IG_ID: ${{ secrets.IG_ID }}
+          IG_TOKEN_MA: ${{ secrets.IG_TOKEN_MA }}
+          IG_ID_MA: ${{ secrets.IG_ID_MA }}
+          YT_CLIENT_ID: ${{ secrets.YT_CLIENT_ID }}
+          YT_CLIENT_SECRET: ${{ secrets.YT_CLIENT_SECRET }}
+          YT_REFRESH_TOKEN: ${{ secrets.YT_REFRESH_TOKEN }}
+          YT_CLIENT_ID_MA: ${{ secrets.YT_CLIENT_ID_MA }}
+          YT_CLIENT_SECRET_MA: ${{ secrets.YT_CLIENT_SECRET_MA }}
+          YT_REFRESH_TOKEN_MA: ${{ secrets.YT_REFRESH_TOKEN_MA }}
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: python3 nuvem/robo.py
