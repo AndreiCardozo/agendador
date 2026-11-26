@@ -49,19 +49,22 @@ def processar(arq, tag, postar, assets, rotulo):
     """Posta (uma vez só) cada item da fila cuja hora chegou; trava como 'postando' antes de enviar."""
     agora = datetime.now(timezone.utc)
     for e in ler(arq):
-        if e.get("status") == "postando" and agora - hora(e) > timedelta(hours=1):
+        travado = e.get("travado_em")
+        if e.get("status") == "postando" and travado and agora - datetime.strptime(
+                travado, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=timezone.utc) > timedelta(minutes=45):
             salvar(arq, e["id"], status="erro", erro=f"o robô parou no meio do envio; confira no {rotulo} se saiu")
         if e.get("status") != "aguardando" or hora(e) > agora:
             continue
         if agora - hora(e) > ATRASO_MAX:
             salvar(arq, e["id"], status="erro", erro="o robô ficou parado e o horário passou muito; não postei atrasado")
         else:
-            if not salvar(arq, e["id"], status="postando"):       # trava antes: nunca posta duas vezes
+            if not salvar(arq, e["id"], status="postando",       # trava antes: nunca posta duas vezes
+                          travado_em=datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")):
                 print("não consegui travar", e["id"])
                 continue
             try:
                 link = postar(e)
-                salvar(arq, e["id"], status="postado", link=link,
+                salvar(arq, e["id"], status="postado", link=link, erro="",
                        quando=datetime.now(timezone.utc).strftime("%Y-%m-%d %H:%M UTC"))
                 print(rotulo, "postado", e["id"], link, flush=True)
             except Exception as x:
