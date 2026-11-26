@@ -16,8 +16,8 @@
   "video_url": "https://github.com/AndreiCardozo/agendador/releases/download/ig-fila/6685bc7d4e.mp4",
   "legenda": "GABEPEIXE FEZ 4% EM 2 HORAS: O GTA 6 É CURTO DEMAIS?\n\n4% em 2 horas... o GTA 6 vai ser curto? 🤔 #gta6 #gtavi #gabepeixe #cortes #gta\n\nCréditos ao streamer gabepeixe",
   "titulo": "GABEPEIXE FEZ 4% EM 2 HORAS: O GTA 6 É CURTO DEMAIS?",
-  "status": "postando",
-  "erro": "o robô parou no meio do envio; confira no Instagram se saiu",
+  "status": "erro",
+  "erro": "Instagram recusou o vídeo: Error: Media upload has failed with error code 2207076",
   "link": "https://www.instagram.com/reel/DgORa3rS5vE/",
   "quando": "2026-11-26 23:19 UTC"
  },
