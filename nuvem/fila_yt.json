@@ -463,5 +463,20 @@
    "historico"
   ],
   "status": "aguardando"
+ },
+ {
+  "id": "4ed7608c59",
+  "horario_utc": "2026-12-04T00:00:00Z",
+  "video_url": "https://github.com/AndreiCardozo/agendador/releases/download/yt-fila/yt_4ed7608c59.mp4",
+  "titulo": "O GTA 6 IA SE CHAMAR GTA AMERICAS #shorts",
+  "descricao": "Você sabia que o GTA 6 quase foi o GTA Americas? 🤯 #gta6 #gtavi #gta #curiosidades #cortes\n\nCréditos ao streamer PaulinhoLOKObr",
+  "tags": [
+   "gta6",
+   "gtavi",
+   "gta",
+   "curiosidades",
+   "cortes"
+  ],
+  "status": "aguardando"
  }
 ]
